@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © 2011-2017 Karliuka Vitalii(karliuka.vitalii@gmail.com)
+ * 
+ * See COPYING.txt for license details.
+ */
+?>
+<?php $collection = $block->getCollection() ?>
+<?php if ($collection->getSize()) : ?>
+    <div class="faonni-socialprovider">
+        <div class="block-title">
+            <strong><?php /* @escapeNotVerified */ echo __('Connect with Social:') ?></strong>
+        </div>        
+        <?php foreach ($collection as $provider) : ?>
+            <?php if (!$provider->isAvailable()) continue ?>
+            <a href="<?php /* @escapeNotVerified */ echo $provider->getUrl() ?>" class="provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>">
+                <?php /* @escapeNotVerified */ echo $provider->getTitle() ?>
+            </a>
+        <?php endforeach ?>
+    </div>
+<?php endif ?>

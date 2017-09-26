@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2011-2017 Karliuka Vitalii(karliuka.vitalii@gmail.com)
+ * 
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Controller\Plugin\Account">
+        <arguments>
+            <argument name="allowedActions" xsi:type="array">
+                <item name="initprovider" xsi:type="string">initprovider</item>
+                <item name="oauth" xsi:type="string">oauth</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

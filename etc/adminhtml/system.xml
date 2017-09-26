@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2011-2017 Karliuka Vitalii(karliuka.vitalii@gmail.com)
+ * 
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!--
+        social networks tab
+        -->	        
+        <tab id="social" translate="label" sortOrder="287">
+            <label>Social</label>
+        </tab>        
+        <!--
+        social provider section
+        -->	        
+        <section id="faonni_socialprovider" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Social Provider</label>
+            <tab>social</tab>
+            <resource>Faonni_SocialLogin::config_provider</resource>
+            <!--
+            google provider config
+            -->	            
+            <group id="google" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google Plus</label>
+                <comment><![CDATA[Before activation you must <a href="http://code.google.com/apis/console#access" target="_blank">register your website</a> with Google to get an App ID and Secret key.]]></comment>
+                <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>                   
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                     
+                </field>
+                <field id="api_key" translate="label" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client ID</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+                <field id="secret" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field> 
+                <field id="redirect" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Redirect Url</label>
+                    <frontend_model>Faonni\SocialLogin\Block\Adminhtml\System\Config\Form\Redirect</frontend_model>
+                    <provider_id>google</provider_id>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                 
+                <field id="width" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Width</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Height</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+                <field id="sort_order" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+            </group>
+            <!--
+            facebook provider config
+            -->	            
+            <group id="facebook" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Facebook</label>
+                <comment><![CDATA[Before activation you must <a href="https://developers.facebook.com/apps/" target="_blank">register your website</a> with Facebook to get an App ID and Secret key.]]></comment>
+                <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>                   
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                     
+                </field>
+                <field id="api_key" translate="label" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Application Api Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+                <field id="secret" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Application Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field> 
+                <field id="redirect" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Redirect Url</label>
+                    <frontend_model>Faonni\SocialLogin\Block\Adminhtml\System\Config\Form\Redirect</frontend_model>
+                    <provider_id>facebook</provider_id>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                 
+                <field id="width" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Width</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Height</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+                <field id="sort_order" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+            </group> 
+            <!--
+            linkedin provider config
+            -->	            
+            <group id="linkedin" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>LinkedIn</label>
+                <comment><![CDATA[Before activation you must <a href="https://www.linkedin.com/secure/developer?newapp=" target="_blank">register your website</a> with Linkedin to get an App ID and Secret key.]]></comment>
+                <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Title</label>                   
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>                     
+                </field>
+                <field id="api_key" translate="label" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client ID</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+                <field id="secret" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Client Secret</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field> 
+                <field id="redirect" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Redirect Url</label>
+                    <frontend_model>Faonni\SocialLogin\Block\Adminhtml\System\Config\Form\Redirect</frontend_model>
+                    <provider_id>linkedin</provider_id>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                 
+                <field id="width" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Width</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>
+                <field id="height" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Height</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+                <field id="sort_order" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                
+            </group>             
+        </section>
+        <!--
+        social login section
+        -->	        
+        <section id="faonni_sociallogin" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Social Login</label>
+            <tab>social</tab>
+            <resource>Faonni_SocialLogin::config</resource>
+            <!--
+            storefront config
+            -->	            
+            <group id="storefront" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Storefront</label>
+                <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                 
+                <field id="default_group" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Customer Group</label>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                      
+                </field>                
+                <field id="popup" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Dialog</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+                        <field id="active">1</field>
+					</depends>                     
+                </field>                 
+            </group>
+        </section> 
+    </system>
+</config>
