@@ -12,6 +12,6 @@
 	event faonni_sociallogin_obtain_token_after
 	-->	    
     <event name="faonni_sociallogin_obtain_token_after">
-        <observer name="faonni_social_login" instance="Faonni\SocialLogin\Observer\ObtainTokenObserver" />
+        <observer name="faonni_sociallogin" instance="Faonni\SocialLogin\Observer\ObtainTokenObserver" />
     </event>            
 </config>
