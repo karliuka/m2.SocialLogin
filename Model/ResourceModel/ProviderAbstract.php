@@ -7,7 +7,7 @@
 namespace Faonni\SocialLogin\Model\ResourceModel;
 
 use Magento\Framework\DataObjectFactory;
-use Magento\Framework\Encryption\EncryptorInterface;
+use Psr\Log\LoggerInterface;
 use Faonni\SocialLogin\Model\Profile\DataFactory;
 use Faonni\SocialLogin\Model\Provider;
 
@@ -22,13 +22,6 @@ abstract class ProviderAbstract implements ProviderInterface
      * @var \Faonni\SocialLogin\Model\Profile\DataFactory
      */
     protected $_profileDataFactory;
-	
-    /**
-     * Encryptor instance
-     *
-     * @var \Magento\Framework\Encryption\EncryptorInterface
-     */
-    protected $_encryptor;  
     
     /**
      * The token URL
@@ -66,17 +59,24 @@ abstract class ProviderAbstract implements ProviderInterface
 	protected $_displayMode = '&display=popup';
 	
     /**
+     * Logger
+     *
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $_logger; 	
+	
+    /**
 	 * Initialize model
 	 *	
      * @param DataFactory $profileDataFactory
-     * @param EncryptorInterface $encryptor    
+     * @param LoggerInterface $logger     
      */
     public function __construct(
         DataFactory $profileDataFactory,
-		EncryptorInterface $encryptor
+		LoggerInterface $logger
     ) {
         $this->_profileDataFactory = $profileDataFactory;
-		$this->_encryptor = $encryptor;
+		$this->_logger = $logger;
     } 
 
     /**
@@ -106,9 +106,7 @@ abstract class ProviderAbstract implements ProviderInterface
 	public function getState(Provider $provider, $target, $storeId, $additional = '')
 	{
 		return md5(
-        //    $this->_encryptor->encrypt(
 			$provider->getId() . '.' . $target . '.' . $storeId . '.' . $additional
-		//)
 		);
 	}
 	
