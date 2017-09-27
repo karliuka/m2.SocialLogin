@@ -15,6 +15,7 @@ use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Escaper;
 use Magento\Store\Model\StoreRepository;
+use Magento\Customer\Model\Session;
 use Psr\Log\LoggerInterface;
 use Faonni\SocialLogin\Helper\Data as SocialLoginHelper;
 use Faonni\SocialLogin\Model\AccountManagementFactory;
@@ -87,7 +88,14 @@ class ObtainTokenObserver implements ObserverInterface
      *
      * @var \Magento\Framework\Escaper
      */    
-    protected $_escaper;    
+    protected $_escaper;  
+    
+    /**
+     * Customer Session
+	 *
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_session;      
 	
     /**
      * Initialize observer
@@ -99,7 +107,8 @@ class ObtainTokenObserver implements ObserverInterface
      * @param AccountManagementFactory $accountManagementFactory 
      * @param LoggerInterface $logger 
      * @param ManagerInterface $messageManager
-     * @param Escaper $escaper     
+     * @param Escaper $escaper 
+     * @param Session $customerSession     
      */
     public function __construct(
         StoreRepository $storeRepository,
@@ -109,7 +118,8 @@ class ObtainTokenObserver implements ObserverInterface
         AccountManagementFactory $accountManagementFactory,
 		LoggerInterface $logger,
 		ManagerInterface $messageManager,
-		Escaper $escaper
+		Escaper $escaper,
+		Session $customerSession
     ) {
         $this->_storeRepository = $storeRepository;
         $this->_resultRedirectFactory = $resultRedirectFactory;
@@ -119,6 +129,7 @@ class ObtainTokenObserver implements ObserverInterface
 		$this->_logger = $logger;
 		$this->_messageManager = $messageManager;
 		$this->_escaper = $escaper;
+		$this->_session = $customerSession;
     }
 
     /**
@@ -132,28 +143,33 @@ class ObtainTokenObserver implements ObserverInterface
 		if (!$this->_helper->isEnabled()) {
             return;
 		}
+		
+        $salt = $this->_session->getSocialLoginSalt();
+         if (empty($salt)) {       
+            return;
+        }		
+		
 		/** @var \Faonni\SocialLogin\Model\Provider $provider */
 		$provider = $observer->getEvent()->getProvider();
 		try {
             foreach ($this->_storeRepository->getList() as $store) {
                 /* math state code */
-                if ($provider->isValidState(Provider::SCOPE_PREFIX, $store->getId())) {
+                if ($provider->isValidState(Provider::SCOPE_PREFIX, $store->getId(), $salt)) {
                     $this->_storeId = $store->getId();
                     $profileData = $provider->getProfileData();
-                    /* load profile */
+
                     $fields = array(
                         'provider_id'  => $provider->getId(), 
                         'provider_uid' => $profileData->getProviderUid()
                     );
                     $profile = $this->_profile->loadByFields($fields);
-                    /* initiate account */
                     $this->_accountManagement->initiateByProfile($profile, $store, $profileData);
-                    /* prepare result */
+
                     $resultRedirect = $this->_resultRedirectFactory->create();
                     $resultRedirect->setUrl(
                         $this->_accountManagement->getRedirectUrl()
                     ); 
-                    /* prepare success message */
+
                     if ($this->_accountManagement->isNewAccount()) {
                         $this->_messageManager->addSuccess(
                             __('Thank you for registering with %1.', $store->getFrontendName())
@@ -162,6 +178,8 @@ class ObtainTokenObserver implements ObserverInterface
                     /** @var \Magento\Framework\DataObject $response */
                     $response = $observer->getEvent()->getResponse();                
                     $response->setResult($resultRedirect); 
+                    
+                    $this->_session->unsSocialLoginSalt();
                     break;
                 }
             }

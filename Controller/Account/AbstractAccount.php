@@ -8,7 +8,9 @@ namespace Faonni\SocialLogin\Controller\Account;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\DataObjectFactory;
+use Magento\Framework\Math\Random;
 use Magento\Customer\Controller\AbstractAccount as CustomerAbstractAccount;
+use Magento\Customer\Model\Session;
 use Psr\Log\LoggerInterface;
 use Faonni\SocialLogin\Helper\Data as SocialLoginHelper;
 use Faonni\SocialLogin\Model\ProviderFactory;
@@ -24,6 +26,20 @@ abstract class AbstractAccount extends CustomerAbstractAccount
      * @var \Magento\Framework\DataObjectFactory
      */
     protected $_dataObjectFactory;
+    
+    /**
+     * Customer Session
+	 *
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_session;  
+    
+    /**
+     * Math Random
+	 *
+     * @var \Magento\Framework\Math\Random
+     */
+    protected $_mathRandom;    
     
     /**
      * Logger
@@ -53,6 +69,8 @@ abstract class AbstractAccount extends CustomerAbstractAccount
      * @param SocialLoginHelper $helper
      * @param ProviderFactory $providerFactory
      * @param DataObjectFactory $dataObjectFactory 
+     * @param Session $customerSession
+     * @param Random $mathRandom     
      * @param LoggerInterface $logger
      */
     public function __construct(
@@ -60,11 +78,15 @@ abstract class AbstractAccount extends CustomerAbstractAccount
         SocialLoginHelper $helper,
         ProviderFactory $providerFactory,
         DataObjectFactory $dataObjectFactory,
+        Session $customerSession,
+        Random $mathRandom,
         LoggerInterface $logger
     ) {
         $this->_helper = $helper;
         $this->_provider = $providerFactory->create();
         $this->_dataObjectFactory = $dataObjectFactory;
+        $this->_session = $customerSession;
+        $this->_mathRandom = $mathRandom;
         $this->_logger = $logger;
         
         parent::__construct(

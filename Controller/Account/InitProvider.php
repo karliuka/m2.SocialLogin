@@ -26,10 +26,14 @@ class InitProvider extends AbstractAccount
         if ($this->_helper->isEnabled() && $id) {
             try {
                 $provider = $this->_provider->load($id);
+                
+                $salt = $this->_mathRandom->getRandomString(32);
+                $this->_session->setSocialLoginSalt($salt);
+                
                 /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
                 $resultRedirect = $this->resultRedirectFactory->create();                                
                 $resultRedirect->setUrl(
-                    $provider->getProviderUrl(Provider::SCOPE_PREFIX)
+                    $provider->getProviderUrl(Provider::SCOPE_PREFIX, $salt)
                 );
                 return $resultRedirect;                  
             } 
