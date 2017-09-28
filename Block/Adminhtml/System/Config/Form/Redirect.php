@@ -51,11 +51,11 @@ class Redirect extends Field
      */
     public function render(AbstractElement $element)
     {
-        $element
+		$element
             ->setReadonly(true)
             ->setValue(
                 $this->_helper->getRedirectUrl(
-                    $element->getFieldConfig('provider_id')
+                    preg_replace("#^faonni_socialprovider_(.+?)_redirect$#", '$1', $element->getId())
                 )
             );        
         return parent::render($element);
