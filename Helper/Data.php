@@ -13,22 +13,22 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Store\Model\Store;
 
 /**
- * Faonni SocialLogin Data helper
+ * Faonni SocialLogin Data Helper
  */
 class Data extends AbstractHelper
 {
     /**
-     * Enabled config path
+     * Enabled Config Path
      */
     const XML_CONFIG_ENABLED = 'faonni_sociallogin/storefront/active';
     	
     /**
-     * Customer default group config path
+     * Customer Default Group Config Path
      */
     const XML_CONFIG_DEFAULT_GROUP = 'faonni_sociallogin/storefront/default_group';
 
     /**
-     * Popup config path
+     * Popup Config Path
      */
     const XML_CONFIG_POPUP = 'faonni_sociallogin/storefront/popup';
     
@@ -40,7 +40,7 @@ class Data extends AbstractHelper
     protected $_storeManager; 
     
     /**
-	 * Initialize helper
+	 * Initialize Helper
 	 *	
      * @param Context $context
      * @param StoreManagerInterface $storeManager
@@ -57,7 +57,7 @@ class Data extends AbstractHelper
     } 
     
     /**
-     * Check Social Login functionality should be enabled
+     * Check Social Login Functionality Should be Enabled
      *
      * @param string $store	 
      * @return bool
@@ -90,7 +90,7 @@ class Data extends AbstractHelper
     } 
     
     /**
-     * Retrieve redirect Provider URL
+     * Retrieve Redirect Provider URL
      * 
      * @param string $probiderId
      * @return string
@@ -102,7 +102,7 @@ class Data extends AbstractHelper
     }
     
     /**
-     * Retrieve Application Store object
+     * Retrieve Application Store Object
      *
      * @param null|string|bool|int|\Magento\Store\Api\Data\StoreInterface $storeId
      * @return \Magento\Store\Api\Data\StoreInterface
@@ -113,7 +113,7 @@ class Data extends AbstractHelper
     }
     
     /**
-     * Retrieve store configuration data
+     * Retrieve Store Configuration Data
      *
      * @param string $path
      * @param int|Store $store	 
