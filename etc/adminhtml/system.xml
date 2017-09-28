@@ -55,7 +55,6 @@
                 <field id="redirect" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Redirect Url</label>
                     <frontend_model>Faonni\SocialLogin\Block\Adminhtml\System\Config\Form\Redirect</frontend_model>
-                    <provider_id>google</provider_id>
 					<depends>
                         <field id="active">1</field>
 					</depends>                     
@@ -115,7 +114,6 @@
                 <field id="redirect" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Redirect Url</label>
                     <frontend_model>Faonni\SocialLogin\Block\Adminhtml\System\Config\Form\Redirect</frontend_model>
-                    <provider_id>facebook</provider_id>
 					<depends>
                         <field id="active">1</field>
 					</depends>                     
@@ -175,7 +173,6 @@
                 <field id="redirect" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Redirect Url</label>
                     <frontend_model>Faonni\SocialLogin\Block\Adminhtml\System\Config\Form\Redirect</frontend_model>
-                    <provider_id>linkedin</provider_id>
 					<depends>
                         <field id="active">1</field>
 					</depends>                     

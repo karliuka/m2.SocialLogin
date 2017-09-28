@@ -68,9 +68,12 @@ class ProviderList extends Template
     public function getCollection()
     {
         if (null === $this->_collection){     
-			$this->_collection = $this->_provider->getCollection()
-                ->addFilter('active', 1)
-                ->load();
+			$this->_collection = $this->_provider->getCollection();				
+			foreach ($this->_collection as $key => $provider) {
+				if (!$provider->isAvailable()) {
+					$this->_collection->removeItemByKey($key);
+				}
+			}					
 		}
 		return $this->_collection;
     }    
