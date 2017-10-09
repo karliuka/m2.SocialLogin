@@ -31,9 +31,9 @@ class Uninstall implements UninstallInterface
         /**
          * Remove table 'faonni_sociallogin_profile'
          */		
-        $tableName = $installer->getTable('faonni_sociallogin_profile');
+        $tableName = 'faonni_sociallogin_profile';
         if ($installer->tableExists($tableName)) {			
-            $connection->dropTable($table);
+            $connection->dropTable($installer->getTable($tableName));
 		}	                                           
         $installer->endSetup();
     }
