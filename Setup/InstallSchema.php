@@ -33,7 +33,7 @@ class InstallSchema implements InstallSchemaInterface
         /**
          * Create table 'faonni_sociallogin_profile'
          */		
-        $tableName = 'faonni_sociallogin_profile';
+        $tableName = $installer->getTable('faonni_sociallogin_profile');
         if (!$installer->tableExists($tableName)) {
             $table = $connection->newTable(
 					$installer->getTable($tableName)
