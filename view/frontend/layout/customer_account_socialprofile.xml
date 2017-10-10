@@ -9,7 +9,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="customer_account"/>
-    <body>
+    <body>   
         <referenceContainer name="content">
             <!-- customer.account.sociallogin.profile -->
             <block class="Faonni\SocialLogin\Block\Account\Profile" name="customer.account.sociallogin.profile" template="account/profile.phtml" cacheable="false"/>

@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © 2011-2017 Karliuka Vitalii(karliuka.vitalii@gmail.com)
+ * 
+ * See COPYING.txt for license details.
+ */
+?>
+<?php $providerCollection = $block->getProviderCollection() ?>
+<?php $profileCollection = $block->getProfileCollection() ?>
+<?php if (0 < count($providerCollection)): ?>
+    <div class="table-wrapper">
+        <?php foreach ($providerCollection as $provider): ?>
+            <?php if (!$provider->isAvailable()): ?>
+                <?php continue ?>
+            <?php endif ?>
+            <div><?php echo /* @noEscape */ $provider->getTitle() ?></div>
+            <?php $collection = $profileCollection->getItemsByColumnValue('provider_id', $provider->getId()) ?>
+            <?php if (0 < count($collection)): ?>
+                <table class="data table" id="my-profiles-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col firstname"><?php echo /* @noEscape */ __('Firstname') ?></th>
+                            <th scope="col" class="col lastname"><?php echo /* @noEscape */ __('Lastname') ?></th>
+                            <th scope="col" class="col email"><?php echo /* @noEscape */ __('Email') ?></th>
+                            <th scope="col" class="col primary"><?php echo /* @noEscape */ __('Primary') ?></th>
+                            <th scope="col" class="col actions"><?php echo /* @noEscape */ __('Action') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($collection as $profile): ?>
+                            <tr>
+                                <td><?php echo /* @noEscape */ $profile->getFirstname() ?></td>
+                                <td><?php echo /* @noEscape */ $profile->getLastname() ?></td>
+                                <td><?php echo /* @noEscape */ $profile->getEmail() ?></td>
+                                <td></td>
+                                <td><a href="#" title="<?php echo /* @noEscape */ __('Delete') ?>"><?php echo /* @noEscape */ __('Delete') ?></a></td>
+                            </tr>                        
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            <?php endif ?>            
+        <?php endforeach ?>
+    </div>
+<?php else : ?>
+    <div class="message info empty"><span><?php echo /* @noEscape */ __('You have no available providers.') ?></span></div>
+<?php endif ?>

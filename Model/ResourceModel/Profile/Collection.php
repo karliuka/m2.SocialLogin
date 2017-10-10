@@ -25,4 +25,20 @@ class Collection extends AbstractCollection
 			'Faonni\SocialLogin\Model\ResourceModel\Profile'
 		);
     }
+    
+    /**
+     * Add Collection Filters by Customer Id
+     *
+     * @param int $customerId
+     * @param boolean $exclude
+     * @return $this
+     */
+    public function addCustomerIdFilter($customerId, $exclude = false)
+    {
+        $condition = $exclude 
+            ? ['neq' => $customerId] 
+            : $customerId;
+            
+        return $this->addFieldToFilter('customer_id', $condition);
+    }    
 }

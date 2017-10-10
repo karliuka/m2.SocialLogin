@@ -84,7 +84,7 @@ class Provider extends DataObject
     protected $_state;    
     
     /**
-	 * Initialize model
+	 * Initialize Model
 	 *	
      * @param ResourceProviderFactory $resourceFactory
      * @param StoreManagerInterface $storeManager
@@ -120,7 +120,7 @@ class Provider extends DataObject
      * Retrieve Provider Collection
      * 	 
      * @throws \Magento\Framework\Exception\LocalizedException     
-     * @return \Faonni\SocialLogin\Model\ResourceModel\Collection
+     * @return \Faonni\SocialLogin\Model\ResourceModel\Provider\Collection
      */
     public function getCollection()
     {
