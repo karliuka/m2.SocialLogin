@@ -13,7 +13,11 @@
             <?php if (!$provider->isAvailable()): ?>
                 <?php continue ?>
             <?php endif ?>
-            <div><?php echo /* @noEscape */ $provider->getTitle() ?></div>
+            <div>
+				<a href="<?php /* @escapeNotVerified */ echo $provider->getUrl() ?>" class="provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>">
+					<?php /* @escapeNotVerified */ echo $provider->getTitle() ?>
+				</a>
+            </div>
             <?php $collection = $profileCollection->getItemsByColumnValue('provider_id', $provider->getId()) ?>
             <?php if (0 < count($collection)): ?>
                 <table class="data table" id="my-profiles-table">
