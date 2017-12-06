@@ -9,9 +9,9 @@ namespace Faonni\SocialLogin\Controller\Account;
 use Faonni\SocialLogin\Controller\Account\AbstractAccount;
 
 /**
- * Delete Controller
+ * Delete Profile Controller
  */
-class Delete extends AbstractAccount
+class DeleteProfile extends AbstractAccount
 {
     /**
      * Delete Action

@@ -37,7 +37,7 @@
                                 <td><?php echo /* @noEscape */ $profile->getLastname() ?></td>
                                 <td><?php echo /* @noEscape */ $profile->getEmail() ?></td>
                                 <td></td>
-                                <td><a href="#" title="<?php echo /* @noEscape */ __('Delete') ?>"><?php echo /* @noEscape */ __('Delete') ?></a></td>
+                                <td><a href="<?php echo $this->getDeleteUrl($profile) ?>" title="<?php echo /* @noEscape */ __('Delete') ?>"><?php echo /* @noEscape */ __('Delete') ?></a></td>
                             </tr>                        
                         <?php endforeach ?>
                     </tbody>

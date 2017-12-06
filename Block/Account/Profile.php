@@ -18,6 +18,11 @@ use Faonni\SocialLogin\Model\ResourceModel\Profile\CollectionFactory as ProfileC
 class Profile extends Template
 {
     /**
+     * Route For Profile Delete Url
+     */
+    const ROUTE_ACCOUNT_DELETE_PROFILE = 'customer/account/deleteProfile';
+    
+    /**
      * Customer Session
      *
      * @var \Magento\Customer\Model\Session;
@@ -80,7 +85,7 @@ class Profile extends Template
     } 
     
     /**
-     * Preparing global layout
+     * Preparing Global Layout
      *
      * @return void
      */
@@ -88,6 +93,19 @@ class Profile extends Template
     {
         parent::_prepareLayout();
         $this->pageConfig->getTitle()->set(__('My Social Profiles'));
+    }
+    
+    /**
+     * Retrieve Profile Delete Url
+     *
+     * @return string
+     */
+    public function getDeleteUrl($profile)
+    {
+        return $this->getUrl(
+			self::ROUTE_ACCOUNT_DELETE_PROFILE, 
+			['id' => $profile->getId()]
+		);
     }
     
     /**
