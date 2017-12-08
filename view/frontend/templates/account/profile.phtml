@@ -8,16 +8,15 @@
 <?php $providerCollection = $block->getProviderCollection() ?>
 <?php $profileCollection = $block->getProfileCollection() ?>
 <?php if (0 < count($providerCollection)): ?>
-    <div class="table-wrapper">
+    <div class="block table-wrapper">
         <?php foreach ($providerCollection as $provider): ?>
             <?php if (!$provider->isAvailable()): ?>
                 <?php continue ?>
             <?php endif ?>
-            <div>
-				<a href="<?php /* @escapeNotVerified */ echo $provider->getUrl() ?>" class="provider provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>">
-					<?php /* @escapeNotVerified */ echo $provider->getTitle() ?>
-				</a>
-            </div>
+			<div class="block-title">
+				<strong><?php /* @escapeNotVerified */ echo $provider->getTitle() ?></strong>
+				<a href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" class="provider provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>">+</a>
+			</div>            
             <?php $collection = $profileCollection->getItemsByColumnValue('provider_id', $provider->getId()) ?>
             <?php if (0 < count($collection)): ?>
                 <table class="data table" id="my-profiles-table">
@@ -42,9 +41,11 @@
                         <?php endforeach ?>
                     </tbody>
                 </table>
+            <?php else : ?>
+				<div class="message info empty"><span><?php echo $block->escapeHtml(__('You do not have a connected %1 profile.', $provider->getTitle())) ?></span></div>            
             <?php endif ?>            
         <?php endforeach ?>
     </div>
 <?php else : ?>
-    <div class="message info empty"><span><?php echo /* @noEscape */ __('You have no available providers.') ?></span></div>
+    <div class="message info empty"><span><?php echo /* @noEscape */ __('You do not have available providers.') ?></span></div>
 <?php endif ?>
