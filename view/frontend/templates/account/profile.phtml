@@ -13,37 +13,32 @@
             <?php if (!$provider->isAvailable()): ?>
                 <?php continue ?>
             <?php endif ?>
-			<div class="block-title">
-				<strong><?php /* @escapeNotVerified */ echo $provider->getTitle() ?></strong>
-				<a href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" class="provider provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>">+</a>
-			</div>            
-            <?php $collection = $profileCollection->getItemsByColumnValue('provider_id', $provider->getId()) ?>
-            <?php if (0 < count($collection)): ?>
-                <table class="data table" id="my-profiles-table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="col firstname"><?php echo /* @noEscape */ __('Firstname') ?></th>
-                            <th scope="col" class="col lastname"><?php echo /* @noEscape */ __('Lastname') ?></th>
-                            <th scope="col" class="col email"><?php echo /* @noEscape */ __('Email') ?></th>
-                            <th scope="col" class="col primary"><?php echo /* @noEscape */ __('Primary') ?></th>
-                            <th scope="col" class="col actions"><?php echo /* @noEscape */ __('Action') ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($collection as $profile): ?>
-                            <tr>
-                                <td><?php echo /* @noEscape */ $profile->getFirstname() ?></td>
-                                <td><?php echo /* @noEscape */ $profile->getLastname() ?></td>
-                                <td><?php echo /* @noEscape */ $profile->getEmail() ?></td>
-                                <td></td>
-                                <td><a href="<?php echo $this->getDeleteUrl($profile) ?>" title="<?php echo /* @noEscape */ __('Delete') ?>"><?php echo /* @noEscape */ __('Delete') ?></a></td>
-                            </tr>                        
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
-            <?php else : ?>
-				<div class="message info empty"><span><?php echo $block->escapeHtml(__('You do not have a connected %1 profile.', $provider->getTitle())) ?></span></div>            
-            <?php endif ?>            
+            <div class="provider-section">
+				<div class="block-title provider-title">
+					<strong><?php /* @escapeNotVerified */ echo $provider->getTitle() ?></strong>
+					<a href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" class="provider provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>"  title="<?php echo /* @noEscape */ __('Add New Profile') ?>"><?php echo /* @noEscape */ __('Add New') ?></a>
+				</div>            
+				<?php $collection = $profileCollection->getItemsByColumnValue('provider_id', $provider->getId()) ?>
+				<?php if (0 < count($collection)): ?>
+					<table class="data table" id="my-profiles-table">
+						<tbody>
+							<?php foreach ($collection as $profile): ?>
+								<tr>
+									<td class="col-firstname"><?php echo /* @noEscape */ $profile->getFirstname() ?></td>
+									<td class="col-lastname"><?php echo /* @noEscape */ $profile->getLastname() ?></td>
+									<td class="col-email"><?php echo /* @noEscape */ $profile->getEmail() ?></td>
+									<td class="col-created"><?php echo /* @noEscape */ $profile->getCreatedAt() ?></td>
+									<td class="col-actions">
+										<a class="action delete" href="<?php echo $this->getDeleteUrl($profile) ?>" title="<?php echo /* @noEscape */ __('Remove This Profile') ?>"></a>
+									</td>
+								</tr>                        
+							<?php endforeach ?>
+						</tbody>
+					</table>
+				<?php else : ?>
+					<div class="message info empty"><span><?php echo $block->escapeHtml(__('You do not have a connected %1 profile.', $provider->getTitle())) ?></span></div>            
+				<?php endif ?> 
+			</div>	
         <?php endforeach ?>
     </div>
 <?php else : ?>

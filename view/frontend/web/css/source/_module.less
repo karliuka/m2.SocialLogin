@@ -29,3 +29,56 @@
 .faonni-socialprovider  a.provider-linkedin {
     background: #007bb6;
 }
+.provider-title a {
+	float:right;
+	line-height: 29px;
+	display: block;
+}
+#my-profiles-table td {
+	border-top: none;
+}
+.provider-section {
+	margin-bottom: 25px;
+}
+.provider-section .col-firstname,
+.provider-section .col-lastname {
+	width: 15%;
+}
+.provider-section .col-email {
+
+}
+.provider-section .col-created {
+	text-align: right;
+	width: 20%;
+}
+.provider-section .col-actions {
+	width: 10%;
+	text-align: right;
+	padding-right: 0;
+}
+.provider-section .action.delete::before {
+    font-size: 12px;
+    line-height: 15px;
+    color: #757575;
+    content: '\e616';
+    font-family: 'luma-icons';
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: normal;
+    overflow: hidden;
+    text-align: center;
+    width: 18px;
+    height: 18px;
+}
+.provider-section .action.delete:hover::before {
+    color: #000;
+}
+.provider-section .message.info > :first-child::before {
+	display: none;
+}
+.provider-section .message.info {
+	padding-left: 15px;
+}
+.customer-account-socialprofile .table-wrapper {
+	border-bottom: none;
+}
