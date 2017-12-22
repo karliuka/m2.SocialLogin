@@ -40,7 +40,14 @@ class AccountManagement
 	 *
      * @var string
      */
-	protected $_redirectUrl = 'customer/account';
+	protected $_redirectUrl = 'customer/account/OauthSuccess';
+	
+    /**
+     * The Account URL
+	 *
+     * @var string
+     */
+	protected $_accountUrl = 'customer/account';
 	
     /**
      * New account flag
@@ -200,6 +207,16 @@ class AccountManagement
     }
     
     /**
+     * Retrieve Account URL
+     * 	 
+     * @return string
+     */
+    public function getAccountUrl()
+    {
+        return $this->_store->getUrl($this->_accountUrl);
+    }
+    
+    /**
      * initiate Customer By Profile
      * 
      * @param Profile $profile
@@ -211,7 +228,7 @@ class AccountManagement
     {
         $this->_store = $store;
         if ($this->_session->isLoggedIn()) {
-            $this->_redirectUrl = 'customer/account/socialProfile';
+            $this->_accountUrl = 'customer/account/socialProfile';
             if (!$profile->getId()) {
 				/* save profile */
 				$profile->setData($data->getData())

@@ -22,13 +22,16 @@ class InitProvider extends AbstractAccount
      */
     public function execute()
     {
-        $id = $this->getRequest()->getParam('id', null);
+        $id = $this->getRequest()->getParam('id');
+        $display = $this->getRequest()->getParam('display');
+        
         if ($this->_helper->isEnabled() && $id) {
             try {
                 $provider = $this->_provider->load($id);
                 
                 $salt = $this->_mathRandom->getRandomString(32);
                 $this->_session->setSocialLoginSalt($salt);
+                $this->_session->setSocialLoginDisplay($display);
                 
                 /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
                 $resultRedirect = $this->resultRedirectFactory->create();                                

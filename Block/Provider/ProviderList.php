@@ -17,9 +17,9 @@ use Faonni\SocialLogin\Model\ProviderFactory;
 class ProviderList extends Template
 {
     /**
-     * SocialLogin helper
+     * Helper
      *
-     * @var Faonni\SocialLogin\Helper\Data
+     * @var \Faonni\SocialLogin\Helper\Data
      */
     protected $_helper;
     
@@ -86,17 +86,5 @@ class ProviderList extends Template
  	public function isPopupMode()
 	{
 		return $this->_helper->isPopupMode();
-	}
-	
-	/**
-	 * Return Js Config active providers
-	 *
-	 * @return array
-	 */		
-	public function getJsConfig()
-	{
-		return json_encode(
-			$this->getCollection()->toArray(array('id', 'title', 'width', 'height'))
-		);
-	}	    
+	}    
 }

@@ -23,9 +23,9 @@ class Oauth extends AbstractAccount
      */
     public function execute()
     {
-		$id = $this->getRequest()->getParam('id', false);
-		$code = $this->getRequest()->getParam('code', false);
-		$state = $this->getRequest()->getParam('state', false);
+		$id = $this->getRequest()->getParam('id');
+		$code = $this->getRequest()->getParam('code');
+		$state = $this->getRequest()->getParam('state');
 		
         if ($this->_helper->isEnabled() && $id && $code && $state) {
             try {        

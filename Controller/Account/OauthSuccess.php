@@ -11,20 +11,20 @@ use Magento\Framework\Controller\ResultFactory;
 use Faonni\SocialLogin\Controller\Account\AbstractAccount;
 
 /**
- * Social Profile Controller
+ * OauthSuccess Controller
  */
-class SocialProfile extends AbstractAccount
+class OauthSuccess extends AbstractAccount
 {
     /**
-     * Customer account profile
+     * OauthSuccess action
      *
-     * @return \Magento\Framework\View\Result\Page
+     * @throws \Magento\Framework\Exception\NotFoundException
      */
     public function execute()
     {
         if (!$this->_helper->isEnabled()) {
             throw new NotFoundException(__('Page not found.'));
-        }
+        } 
         /** @var \Magento\Framework\View\Result\Page resultPage */
         return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }

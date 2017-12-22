@@ -16,7 +16,13 @@
             <div class="provider-section">
 				<div class="block-title provider-title">
 					<strong><?php /* @escapeNotVerified */ echo $provider->getTitle() ?></strong>
-					<a href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" class="provider provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>"  title="<?php echo /* @noEscape */ __('Add New Profile') ?>"><?php echo /* @noEscape */ __('Add New') ?></a>
+					<a 	href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" 
+						class="provider provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>"  
+						title="<?php echo /* @noEscape */ __('Add New Profile') ?>"
+						data-width="<?php /* @escapeNotVerified */ echo $provider->getWidth() ?>" 
+						data-height="<?php /* @escapeNotVerified */ echo $provider->getHeight() ?>">					   
+					<?php echo /* @noEscape */ __('Add New') ?>
+				</a>
 				</div>            
 				<?php $collection = $profileCollection->getItemsByColumnValue('provider_id', $provider->getId()) ?>
 				<?php if (0 < count($collection)): ?>
@@ -41,6 +47,11 @@
 			</div>	
         <?php endforeach ?>
     </div>
+    <?php if ($block->isPopupMode()): ?>
+		<script type="text/x-magento-init">
+			{".provider": {"faonni/sociallogin": {}}}
+		</script>
+	<?php endif ?>
 <?php else : ?>
     <div class="message info empty"><span><?php echo /* @noEscape */ __('You do not have available providers.') ?></span></div>
 <?php endif ?>

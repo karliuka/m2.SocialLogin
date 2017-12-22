@@ -60,7 +60,7 @@ class ObtainTokenObserver implements ObserverInterface
      *   
      * @var \Magento\Framework\Controller\Result\RedirectFactory
      */
-    protected $_resultRedirectFactory;  
+    protected $_resultRedirectFactory;   
     
     /**
      * Account Management
@@ -95,13 +95,20 @@ class ObtainTokenObserver implements ObserverInterface
 	 *
      * @var \Magento\Customer\Model\Session
      */
-    protected $_session;      
+    protected $_session; 
+    
+    /**
+     * The Redirect URL
+	 *
+     * @var string
+     */
+	protected $_redirectUrl = 'customer/account/OauthSuccess';    
 	
     /**
      * Initialize observer
      *
      * @param StoreRepository $storeRepository
-     * @param RedirectFactory $resultRedirectFactory
+     * @param RedirectFactory $resultRedirectFactory    
      * @param SocialLoginHelper $helper
      * @param ProfileFactory $profile    
      * @param AccountManagementFactory $accountManagementFactory 
@@ -164,11 +171,13 @@ class ObtainTokenObserver implements ObserverInterface
                     );
                     $profile = $this->_profile->loadByFields($fields);
                     $this->_accountManagement->initiateByProfile($profile, $store, $profileData);
+                    
+                    $url = ('popup' == $this->_session->getSocialLoginDisplay()) 
+						? $this->_accountManagement->getRedirectUrl()
+						: $this->_accountManagement->getAccountUrl();
 
-                    $resultRedirect = $this->_resultRedirectFactory->create();
-                    $resultRedirect->setUrl(
-                        $this->_accountManagement->getRedirectUrl()
-                    ); 
+					$result = $this->_resultRedirectFactory->create();
+					$result->setUrl($url); 					
 
                     if ($this->_accountManagement->isNewAccount()) {
                         $this->_messageManager->addSuccess(
@@ -177,7 +186,7 @@ class ObtainTokenObserver implements ObserverInterface
                     }
                     /** @var \Magento\Framework\DataObject $response */
                     $response = $observer->getEvent()->getResponse();                
-                    $response->setResult($resultRedirect); 
+                    $response->setResult($result); 
                     
                     $this->_session->unsSocialLoginSalt();
                     break;

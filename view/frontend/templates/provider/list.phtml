@@ -8,12 +8,20 @@
 <?php $collection = $block->getCollection() ?>
 <?php if ($collection->getSize()) : ?>
     <div class="faonni-socialprovider">
-        <div class="block-title"><?php /* @escapeNotVerified */ echo __('Connect with Social') ?></div>        
+        <div class="block-title"><?php echo $block->escapeHtml(__('Connect with Social')) ?></div>        
         <?php foreach ($collection as $provider) : ?>
-            <?php //if (!$provider->isAvailable()) continue ?>
-            <a href="<?php /* @escapeNotVerified */ echo $provider->getUrl() ?>" class="provider provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>">
-                <?php /* @escapeNotVerified */ echo $provider->getTitle() ?>
+            <?php if (!$provider->isAvailable()) continue ?>
+            <a href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" 
+			   class="provider provider-<?php echo $block->escapeHtml($provider->getId()) ?>" 
+			   data-width="<?php echo $block->escapeHtml($provider->getWidth()) ?>" 
+			   data-height="<?php echo $block->escapeHtml($provider->getHeight()) ?>">
+                <?php echo $block->escapeHtml($provider->getTitle()) ?>
             </a>
         <?php endforeach ?>
     </div>
+    <?php if ($block->isPopupMode()): ?>
+		<script type="text/x-magento-init">
+			{".provider": {"faonni/sociallogin": {}}}
+		</script>
+	<?php endif ?>  
 <?php endif ?>

@@ -9,6 +9,7 @@ namespace Faonni\SocialLogin\Block\Account;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Customer\Model\Session;
+use Faonni\SocialLogin\Helper\Data as SocialLoginHelper;
 use Faonni\SocialLogin\Model\ResourceModel\Provider\CollectionFactory as ProviderCollectionFactory;
 use Faonni\SocialLogin\Model\ResourceModel\Profile\CollectionFactory as ProfileCollectionFactory;
 
@@ -21,6 +22,13 @@ class Profile extends Template
      * Route For Profile Delete Url
      */
     const ROUTE_ACCOUNT_DELETE_PROFILE = 'customer/account/deleteProfile';
+    
+    /**
+     * Helper
+     *
+     * @var \Faonni\SocialLogin\Helper\Data
+     */
+    protected $_helper;
     
     /**
      * Customer Session
@@ -60,6 +68,7 @@ class Profile extends Template
     /**
 	 * Initialize Block
 	 *
+     * @param SocialLoginHelper $helper	 
      * @param Session $customerSession	 
      * @param ProviderCollectionFactory $providerCollectionFactory
      * @param ProfileCollectionFactory $profileCollectionFactory     
@@ -67,12 +76,14 @@ class Profile extends Template
      * @param array $data     
      */
     public function __construct(
+        SocialLoginHelper $helper,    
         Session $customerSession,
         ProviderCollectionFactory $providerCollectionFactory,
         ProfileCollectionFactory $profileCollectionFactory,
         Context $context, 
         array $data = []
     ) {
+        $this->_helper = $helper;       
         $this->_providerCollectionFactory = $providerCollectionFactory;
         $this->_profileCollectionFactory = $profileCollectionFactory;
         
@@ -81,7 +92,7 @@ class Profile extends Template
             $data
         );
         
-        $this->_session = $customerSession;
+        $this->_session = $customerSession;         
     } 
     
     /**
@@ -92,7 +103,10 @@ class Profile extends Template
     protected function _prepareLayout()
     {
         parent::_prepareLayout();
-        $this->pageConfig->getTitle()->set(__('My Social Profiles'));
+        
+        $this->pageConfig->getTitle()->set(
+			__('My Social Profiles')
+		);
     }
     
     /**
@@ -135,5 +149,15 @@ class Profile extends Template
             );
 		}
 		return $this->_profileCollection;
-    }      
+    }
+    
+	/**
+	 * Check Popup mode	
+	 * 
+	 * @return bool
+	 */	
+ 	public function isPopupMode()
+	{
+		return $this->_helper->isPopupMode();
+	}     
 }
