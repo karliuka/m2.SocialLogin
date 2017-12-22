@@ -16,7 +16,8 @@ function($) {
          * @var {Object}
          */		
 		options: {
-			popupId: 'SocialLoginPopup'
+			popupId: 'SocialLoginPopup',
+			minWidth: 768
 		},
 		
         /**
@@ -30,6 +31,9 @@ function($) {
 		* @returns {void}
 		*/		
 		_create: function() {
+			if ($(document).width() < this.options.minWidth) {
+				return;
+			}
 			
 			var width = $(this.element).data('width'),
 				height = $(this.element).data('height'),
