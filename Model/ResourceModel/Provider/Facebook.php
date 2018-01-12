@@ -147,7 +147,7 @@ class Facebook extends ProviderAbstract
      */
     public function validateProfile($data)
     {
-        /* check email address */$data->email = null;
+        /* check email address */
         if (empty($data->email)) {
             throw new LocalizedException(
                 new Phrase('Please check Your Facebook account settings. Set email address as primary and make it public.')
