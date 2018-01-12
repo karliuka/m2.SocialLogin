@@ -63,8 +63,15 @@ abstract class ProviderAbstract implements ProviderInterface
      *
      * @var \Psr\Log\LoggerInterface
      */
-    protected $_logger; 	
-	
+    protected $_logger; 
+    
+    /**
+     * Error messages
+     *
+     * @var array
+     */
+    protected $_errors = []; 
+    
     /**
 	 * Initialize model
 	 *	
@@ -216,5 +223,15 @@ abstract class ProviderAbstract implements ProviderInterface
 			'adapter'     => 'Zend_Http_Client_Adapter_Curl',
 			'curloptions' => [CURLOPT_SSL_VERIFYPEER => false],
 		]);
-    }	
+    }
+    
+    /**
+     * Retrieve Error messages
+	 *
+     * @return array
+     */
+    public function getErrors() 
+	{
+		return $this->_errors; 
+    }    
 }
