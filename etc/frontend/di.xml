@@ -13,6 +13,7 @@
             <argument name="allowedActions" xsi:type="array">
                 <item name="initprovider" xsi:type="string">initprovider</item>
                 <item name="oauth" xsi:type="string">oauth</item>
+				<item name="popupclose" xsi:type="string">popupclose</item>
             </argument>
         </arguments>
     </type>

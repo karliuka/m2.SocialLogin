@@ -28,13 +28,6 @@ use Faonni\SocialLogin\Model\Provider;
 class ObtainTokenObserver implements ObserverInterface
 {
     /**
-     * Target Store Id
-     *
-     * @var string
-     */
-    protected $_storeId;
-
-    /**
      * Store Repository
      *
      * @var \Magento\Store\Model\StoreRepository
@@ -96,13 +89,6 @@ class ObtainTokenObserver implements ObserverInterface
      * @var \Magento\Customer\Model\Session
      */
     protected $_session; 
-    
-    /**
-     * The Redirect URL
-	 *
-     * @var string
-     */
-	protected $_redirectUrl = 'customer/account/OauthSuccess';    
 	
     /**
      * Initialize observer
@@ -158,68 +144,74 @@ class ObtainTokenObserver implements ObserverInterface
 		
 		/** @var \Faonni\SocialLogin\Model\Provider $provider */
 		$provider = $observer->getEvent()->getProvider();
-		try {
-            foreach ($this->_storeRepository->getList() as $store) {
-                /* math state code */
-                if ($provider->isValidState(Provider::SCOPE_PREFIX, $store->getId(), $salt)) {
-                    $this->_storeId = $store->getId();
-                    $profileData = $provider->getProfileData();
-
-                    $fields = array(
-                        'provider_id'  => $provider->getId(), 
-                        'provider_uid' => $profileData->getProviderUid()
-                    );
-                    $profile = $this->_profile->loadByFields($fields);
-                    $this->_accountManagement->initiateByProfile($profile, $store, $profileData);
-                    
-                    $url = ('popup' == $this->_session->getSocialLoginDisplay()) 
+		foreach ($this->_storeRepository->getList() as $store) {
+			/* math state code */
+			if ($provider->isValidState(Provider::SCOPE_PREFIX, $store->getId(), $salt)) {
+				$this->_accountManagement->setStore($store);
+				try {
+					$profileData = $provider->getProfileData();
+					if ($profileData) {
+						$fields = array(
+							'provider_id'  => $provider->getId(), 
+							'provider_uid' => $profileData->getProviderUid()
+						);
+						
+						$profile = $this->_profile->loadByFields($fields);
+						$this->_accountManagement->initiateByProfile($profile, $profileData);
+						
+						if ($this->_accountManagement->isNewAccount()) {
+							$this->_messageManager->addSuccess(
+								__('Thank you for registering with %1.', $store->getFrontendName())
+							);
+						}					
+					} else {
+						$this->_messageManager->addError( __('Service is temporarily unavailable.'));					
+					}
+				}
+				/* state exception */
+				catch (StateException $e) {;
+					$url = $store->getUrl('customer/account/forgotpassword');
+					$this->_messageManager->addError(
+						__('There is already an account with this email address. If you are sure that it is your email address, <a href="%1">click here</a> to get your password and access your account.', $url)
+					);
+				} 
+				/* input exception */
+				catch (InputException $e) {
+					$this->_messageManager->addError(
+						$this->_escaper->escapeHtml($e->getMessage())
+					);
+					foreach ($e->getErrors() as $error) {
+						$this->_messageManager->addError(
+							$this->_escaper->escapeHtml($error->getMessage())
+						);
+					}
+				} 
+				/* localized exception */
+				catch (LocalizedException $e) {
+					$this->_messageManager->addError(
+						$this->_escaper->escapeHtml($e->getMessage())
+					);
+				} 
+				/* other exception */
+				catch (\Exception $e) {
+					$this->_messageManager->addException($e, __('We can\'t save the customer.'));
+				}				
+				finally {
+					$url = ('popup' == $this->_session->getSocialLoginDisplay()) 
 						? $this->_accountManagement->getRedirectUrl()
 						: $this->_accountManagement->getAccountUrl();
-
+						
 					$result = $this->_resultRedirectFactory->create();
-					$result->setUrl($url); 					
-
-                    if ($this->_accountManagement->isNewAccount()) {
-                        $this->_messageManager->addSuccess(
-                            __('Thank you for registering with %1.', $store->getFrontendName())
-                        );
-                    }
-                    /** @var \Magento\Framework\DataObject $response */
-                    $response = $observer->getEvent()->getResponse();                
-                    $response->setResult($result); 
-                    
-                    $this->_session->unsSocialLoginSalt();
-                    break;
-                }
-            }
-        }
-        /* state exception */
-        catch (StateException $e) {
-            $url = $this->_helper->getStore($this->_storeId)->getUrl('customer/account/forgotpassword');
-            $this->_messageManager->addError(
-                __('There is already an account with this email address. If you are sure that it is your email address, <a href="%1">click here</a> to get your password and access your account.', $url)
-            );
-        } 
-        /* input exception */
-        catch (InputException $e) {
-            $this->_messageManager->addError(
-                $this->_escaper->escapeHtml($e->getMessage())
-            );
-            foreach ($e->getErrors() as $error) {
-                $this->_messageManager->addError(
-                    $this->_escaper->escapeHtml($error->getMessage())
-                );
-            }
-        } 
-        /* localized exception */
-        catch (LocalizedException $e) {
-            $this->_messageManager->addError(
-                $this->_escaper->escapeHtml($e->getMessage())
-            );
-        } 
-        /* other exception */
-        catch (\Exception $e) {
-            $this->_messageManager->addException($e, __('We can\'t save the customer.'));
-        }
+					$result->setUrl($url); 
+					
+					/** @var \Magento\Framework\DataObject $response */
+					$response = $observer->getEvent()->getResponse();                
+					$response->setResult($result); 
+					
+					$this->_session->unsSocialLoginSalt();				
+				}
+				break;
+			}
+		}
     }
 }  

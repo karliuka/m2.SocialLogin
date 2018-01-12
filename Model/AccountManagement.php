@@ -40,7 +40,7 @@ class AccountManagement
 	 *
      * @var string
      */
-	protected $_redirectUrl = 'customer/account/OauthSuccess';
+	protected $_redirectUrl = 'customer/account/PopupClose';
 	
     /**
      * The Account URL
@@ -217,16 +217,36 @@ class AccountManagement
     }
     
     /**
+     * Retrieve Store
+     * 	 
+     * @return Store
+     */
+    public function getStore()
+    {
+        return $this->_store;
+    }
+    
+    /**
+     * Set Store
+     * 
+     * @param Store $store     
+     * @return \Faonni\SocialLogin\Model\AccountManagement
+     */
+    public function setStore(Store $store)
+    {
+        $this->_store = $store;
+        return $this;
+    }
+    
+    /**
      * initiate Customer By Profile
      * 
      * @param Profile $profile
-     * @param Store $store
      * @param ProfileData $data	 
      * @return \Faonni\SocialLogin\Model\AccountManagement
      */
-    public function initiateByProfile(Profile $profile, Store $store, ProfileData $data)
+    public function initiateByProfile(Profile $profile, ProfileData $data)
     {
-        $this->_store = $store;
         if ($this->_session->isLoggedIn()) {
             $this->_accountUrl = 'customer/account/socialProfile';
             if (!$profile->getId()) {

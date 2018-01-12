@@ -11,12 +11,12 @@ use Magento\Framework\Controller\ResultFactory;
 use Faonni\SocialLogin\Controller\Account\AbstractAccount;
 
 /**
- * OauthSuccess Controller
+ * PopupClose Controller
  */
-class OauthSuccess extends AbstractAccount
+class PopupClose extends AbstractAccount
 {
     /**
-     * OauthSuccess action
+     * PopupClose action
      *
      * @throws \Magento\Framework\Exception\NotFoundException
      */

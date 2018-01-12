@@ -6,6 +6,8 @@
  */
 namespace Faonni\SocialLogin\Model\ResourceModel\Provider;
 
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
 use Faonni\SocialLogin\Model\ResourceModel\ProviderAbstract;
 use Faonni\SocialLogin\Model\Provider;
 
@@ -145,8 +147,14 @@ class Facebook extends ProviderAbstract
      */
     public function validateProfile($data)
     {
+        /* check email address */$data->email = null;
+        if (empty($data->email)) {
+            throw new LocalizedException(
+                new Phrase('Please check Your Facebook account settings. Set email address as primary and make it public.')
+            );
+        }
         /* check required values */
-        $varNames = ['id', 'first_name', 'last_name', 'email'];
+        $varNames = ['id', 'first_name', 'last_name'];
         foreach ($varNames as $var) {
             if (empty($data->{$var})) return false;
         }
