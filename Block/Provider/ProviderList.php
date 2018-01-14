@@ -24,21 +24,21 @@ class ProviderList extends Template
     protected $_helper;
     
     /**
-     * Provider model
+     * Provider Model
      *
      * @var \Faonni\SocialLogin\Model\Provider
      */
     protected $_provider;
     
     /**
-     * Providers collection
+     * Providers Collection
      *
      * @var \Faonni\SocialLogin\Model\ResourceModel\Provider\Collection
      */
     protected $_collection;
     
     /**
-	 * Initialize block
+	 * Initialize Block
 	 *	
      * @param SocialLoginHelper $helper
      * @param ProviderFactory $providerFactory
@@ -79,7 +79,7 @@ class ProviderList extends Template
     }    
     
 	/**
-	 * Check Popup mode	
+	 * Check Popup Mode	
 	 * 
 	 * @return bool
 	 */	

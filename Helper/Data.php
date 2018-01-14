@@ -68,7 +68,7 @@ class Data extends AbstractHelper
     } 
     
     /**
-     * Check Popup mode
+     * Check Popup Mode
      *
      * @param string $store	 
      * @return bool

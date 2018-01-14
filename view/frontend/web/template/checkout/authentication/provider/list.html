@@ -1,0 +1,20 @@
+<!--
+/**
+ * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
+ * 
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko if: isEnabled() -->
+<div class="block block-sociallogin">
+	<div class="block-title">
+		<strong id="block-sociallogin-heading"
+				role="heading"
+				aria-level="1"
+				data-bind="i18n: 'Connect with Social'"></strong>
+	</div>
+	<!-- ko foreach: getCollection() -->
+	<span data-bind="text: title"></span>
+	<!-- /ko -->
+</div>
+<!-- /ko -->
