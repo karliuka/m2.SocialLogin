@@ -34,7 +34,7 @@ function($) {
 			if ($(document).width() < this.options.minWidth) {
 				return;
 			}
-			console.log('faonni.socialLogin');
+			
 			var width = $(this.element).data('width'),
 				height = $(this.element).data('height'),
 				left = ($(document).width() - width)/2,
