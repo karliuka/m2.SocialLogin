@@ -6,6 +6,10 @@ Extension allows your user to login or register by using their existing account 
 
 <img alt="Magento2 Social Login" src="https://karliuka.github.io/m2/social-login/login.png" style="width:100%"/>
 
+### Checkout page
+
+<img alt="Magento2 Social Login" src="https://karliuka.github.io/m2/social-login/checkout.png" style="width:100%"/>
+
 ### Profile page
 
 <img alt="Magento2 Social Login" src="https://karliuka.github.io/m2/social-login/profile.png" style="width:100%"/>
