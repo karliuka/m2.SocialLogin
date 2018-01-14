@@ -13,8 +13,10 @@
 				aria-level="1"
 				data-bind="i18n: 'Connect with Social'"></strong>
 	</div>
+	<div class="faonni-socialprovider">
 	<!-- ko foreach: getCollection() -->
-	<span data-bind="text: title"></span>
+		<a data-bind="text: title, attr: {href: url, 'data-width': width, 'data-height': height, class: 'provider provider-' + id}"></a>
 	<!-- /ko -->
+	</div>
 </div>
 <!-- /ko -->
