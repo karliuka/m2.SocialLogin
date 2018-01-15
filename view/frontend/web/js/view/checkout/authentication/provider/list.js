@@ -47,7 +47,7 @@ function ($, Component) {
             if (window[this.configSource] && window[this.configSource].sociallogin) {
                 var config = window[this.configSource].sociallogin;
 				this.providers = config.providers ? config.providers : [];
-				this.popup = config.popup ? true : false;
+				this.popup = config.popup == '1' ? true : false;
 				if (0 < this.providers.length) {
 					this.enabled = true;
 				}

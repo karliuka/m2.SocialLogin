@@ -6,6 +6,9 @@
  */
 namespace Faonni\SocialLogin\Model\Checkout;
 
+use Magento\Framework\Url\EncoderInterface;
+use Magento\Framework\UrlInterface;
+use Magento\Customer\Model\Url;
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Faonni\SocialLogin\Helper\Data as SocialLoginHelper;
 use Faonni\SocialLogin\Model\ProviderFactory;
@@ -30,17 +33,37 @@ class ConfigProvider implements ConfigProviderInterface
     protected $_provider;
     
     /**
+     * Url Encoder
+     *
+     * @var \Magento\Framework\Url\EncoderInterface
+     */
+    protected $_urlEncoder; 
+    
+    /**
+     * URL builder
+     *
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $_urlBuilder;    
+    
+    /**
 	 * Initialize Config
 	 *	
      * @param SocialLoginHelper $helper
-     * @param ProviderFactory $providerFactory   
+     * @param ProviderFactory $providerFactory 
+     * @param EncoderInterface $urlEncoder
+     * @param UrlInterface $urlBuilder     
      */
     public function __construct(
         SocialLoginHelper $helper,
-        ProviderFactory $providerFactory
+        ProviderFactory $providerFactory,
+        EncoderInterface $urlEncoder,
+        UrlInterface $urlBuilder
     ) {
         $this->_helper = $helper;
         $this->_provider = $providerFactory->create();
+        $this->_urlEncoder = $urlEncoder;
+        $this->_urlBuilder = $urlBuilder;        
     } 
 
     /**
@@ -57,6 +80,18 @@ class ConfigProvider implements ConfigProviderInterface
     }
     
     /**
+     * Generate Url By Route And Parameters
+     *
+     * @param   string $route
+     * @param   array $params
+     * @return  string
+     */
+    public function getUrl($route = '', $params = [])
+    {
+        return $this->_urlBuilder->getUrl($route, $params);
+    }
+    
+    /**
      * Retrieve Provider Collection
      * 	    
      * @return \Faonni\SocialLogin\Model\ResourceModel\Provider\Collection
@@ -64,16 +99,22 @@ class ConfigProvider implements ConfigProviderInterface
     public function getCollection()
     {   
 		$providers = [];
+		$params = [
+			Url::REFERER_QUERY_PARAM_NAME => 
+			$this->_urlEncoder->encode(
+				$this->getUrl('*/*/*', ['_current' => true, '_fragment' => 'shipping'])
+			)
+		];
 		$collection = $this->_provider->getCollection();				
 		foreach ($collection as $key => $provider) {
 			if (!$provider->isAvailable()) {
 				continue;
-			}
+			}		
             $providers[] = [
                 'id' => $provider->getId(),
                 'width'  => $provider->getWidth(),
                 'height' => $provider->getHeight(),
-                'url'    => $provider->getUrl(),
+                'url'    => $provider->getUrl($params),
                 'title'  => $provider->getTitle()
             ];			
 		}

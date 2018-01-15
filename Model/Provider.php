@@ -136,20 +136,21 @@ class Provider extends DataObject
      * @param null|string|bool|int|\Magento\Store\Api\Data\StoreInterface $storeId
      * @return \Magento\Store\Api\Data\StoreInterface
      */
-    public function getStore($storeId = null)
+    public function getStore($storeId=null)
     {
         return $this->_storeManager->getStore($storeId);
     }
     
     /**
      * Retrieve init Provider URL
-     * 	 
+     * 
+     * @param array $params   
      * @return string
      */
-    public function getUrl()
+    public function getUrl($params=[])
     {
 		return $this->getStore()->getUrl(
-            'customer/account/initProvider', ['id' => $this->getId()]
+            'customer/account/initProvider', array_merge($params, ['id' => $this->getId()])
         );
     }
 	
@@ -180,7 +181,7 @@ class Provider extends DataObject
 	 * @param string $additional
      * @return string
      */
-	public function getProviderUrl($target, $additional = '')
+	public function getProviderUrl($target, $additional='')
 	{
 		return $this->getResource()->getProviderUrl($this, $target, $additional);
 	}
@@ -193,7 +194,7 @@ class Provider extends DataObject
 	 * @param string $additional
      * @return string
      */	
-	public function getState($target, $storeId, $additional = '')
+	public function getState($target, $storeId, $additional='')
 	{
 		return $this->getResource()->getState($this, $target, $storeId, $additional);
 	}
@@ -261,7 +262,7 @@ class Provider extends DataObject
 	 * @param string $additional	 
      * @return bool
      */	
-	public function isValidState($target, $storeId, $additional = '')
+	public function isValidState($target, $storeId, $additional='')
 	{
 		return $this->_state && $this->_state == $this->getState($target, $storeId, $additional);
 	}

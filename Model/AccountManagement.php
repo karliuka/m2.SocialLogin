@@ -40,7 +40,7 @@ class AccountManagement
 	 *
      * @var string
      */
-	protected $_redirectUrl = 'customer/account/PopupClose';
+	protected $_popupCloseUrl = 'customer/account/PopupClose';
 	
     /**
      * The Account URL
@@ -197,13 +197,13 @@ class AccountManagement
     }
     
     /**
-     * Retrieve Redirect URL
+     * Retrieve Popup Close URL
      * 	 
      * @return string
      */
-    public function getRedirectUrl()
+    public function getPopupCloseUrl()
     {
-        return $this->_store->getUrl($this->_redirectUrl);
+        return $this->_store->getUrl($this->_popupCloseUrl);
     }
     
     /**

@@ -197,10 +197,13 @@ class ObtainTokenObserver implements ObserverInterface
 					$this->_messageManager->addException($e, __('We can\'t save the customer.'));
 				}				
 				finally {
-					$url = ('popup' == $this->_session->getSocialLoginDisplay()) 
-						? $this->_accountManagement->getRedirectUrl()
-						: $this->_accountManagement->getAccountUrl();
-						
+					if ('popup' == $this->_session->getSocialLoginDisplay()) {
+						$url = $this->_accountManagement->getPopupCloseUrl();
+					} elseif ($this->_session->getAfterAuthUrl()) {
+						$url = $this->_session->getAfterAuthUrl(true);
+					} else {
+						$url = $this->_accountManagement->getAccountUrl();
+					}
 					$result = $this->_resultRedirectFactory->create();
 					$result->setUrl($url); 
 					
