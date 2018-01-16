@@ -22,7 +22,7 @@
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="faonni_sociallogin_config_provider" xsi:type="object">Faonni\SocialLogin\Model\Checkout\ConfigProvider</item>
+                <item name="faonni_sociallogin" xsi:type="object">Faonni\SocialLogin\Model\Checkout\ConfigProvider</item>
             </argument>
         </arguments>
     </type>

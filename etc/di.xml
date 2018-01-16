@@ -24,4 +24,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Checkout\Block\Cart\Sidebar">
+        <plugin name="faonni_sociallogin" type="Faonni\SocialLogin\Plugin\Checkout\Block\Cart\SidebarPlugin" sortOrder="51" />
+    </type>	
 </config> 

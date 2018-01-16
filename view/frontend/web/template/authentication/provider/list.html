@@ -6,13 +6,6 @@
  */
 -->
 <!-- ko if: isEnabled() -->
-<div class="block-sociallogin">
-	<div class="block-title">
-		<strong id="block-sociallogin-heading"
-				role="heading"
-				aria-level="1"
-				data-bind="i18n: 'Connect with Social'"></strong>
-	</div>
 	<div class="faonni-socialprovider">
 	<!-- ko foreach: getCollection() -->
 		<!-- ko if: $parent.isPopup() -->
@@ -23,5 +16,4 @@
 		<!-- /ko -->			
 	<!-- /ko -->
 	</div>
-</div>
 <!-- /ko -->
