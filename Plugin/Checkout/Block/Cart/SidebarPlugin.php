@@ -1,6 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
+ * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
+ * 
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Plugin\Checkout\Block\Cart;
