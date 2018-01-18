@@ -10,7 +10,6 @@
     <div class="faonni-socialprovider">
         <div class="block-title"><?php echo $block->escapeHtml(__('Connect with Social')) ?></div>        
         <?php foreach ($collection as $provider) : ?>
-            <?php if (!$provider->isAvailable()) continue ?>
             <a href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" 
 			   class="provider provider-<?php echo $block->escapeHtml($provider->getId()) ?>" 
 			   data-width="<?php echo $block->escapeHtml($provider->getWidth()) ?>" 
