@@ -6,54 +6,54 @@
 define([
     'jquery',
     'uiComponent',
-	'ko'
+    'ko'
 ],
 function ($, Component) {
     'use strict';
-	
+
     return Component.extend({
         /**
          * Default Config Option
          * @var {Object}
-         */			
+         */
         defaults: {
             template: 'Faonni_SocialLogin/checkout/authentication/provider/list'
         },
-		
+
         /**
          * Enabled Flag
          * @var {Boolean}
-         */		
-		enabled: false,
-		
+         */
+        enabled: false,
+
         /**
          * Popup Flag
          * @var {Boolean}
-         */		
-		popup: false,
-		
+         */
+        popup: false,
+
         /**
          * Provider Collection
          * @var {Array}
-         */		
-		providers: [],
-		
+         */
+        providers: [],
+
         /**
          * initialize Component
          * @return {Void}
-         */	
+         */
         initialize: function () {
             this._super();
             if (window[this.configSource] && window[this.configSource].sociallogin) {
                 var config = window[this.configSource].sociallogin;
-				this.providers = config.providers ? config.providers : [];
-				this.popup = config.popup == '1' ? true : false;
-				if (0 < this.providers.length) {
-					this.enabled = true;
-				}
-            }			
+                this.providers = config.providers ? config.providers : [];
+                this.popup = config.popup == '1' ? true : false;
+                if (0 < this.providers.length) {
+                    this.enabled = true;
+                }
+            }
         },
-		
+
         /**
          * Check Functionality Should be Enabled
          * @return {Boolean}
@@ -61,7 +61,7 @@ function ($, Component) {
         isEnabled: function () {
             return this.enabled;
         },
-		
+
         /**
          * Check Popup Mode
          * @return {Boolean}
@@ -69,13 +69,13 @@ function ($, Component) {
         isPopup: function () {
             return this.popup;
         },
-		
-		/**
-		 * Retrieve Provider Collection
-		* @returns {Array}
-		*/			
-		getCollection: function() {
-			return this.providers;	
-		}
+
+        /**
+         * Retrieve Provider Collection
+         * @returns {Array}
+         */
+        getCollection: function() {
+            return this.providers;
+        }
     });
 });

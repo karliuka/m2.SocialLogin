@@ -6,14 +6,14 @@
  */
 -->
 <!-- ko if: isEnabled() -->
-	<div class="faonni-socialprovider">
-	<!-- ko foreach: getCollection() -->
-		<!-- ko if: $parent.isPopup() -->
-		<a data-bind="text: title, attr: {href: url, 'data-width': width, 'data-height': height, class: 'provider provider-' + id}, mageInit: {'faonni/sociallogin': {}}"></a>
-		<!-- /ko -->
-		<!-- ko ifnot: $parent.isPopup() -->
-		<a data-bind="text: title, attr: {href: url, 'data-width': width, 'data-height': height, class: 'provider provider-' + id}"></a>
-		<!-- /ko -->			
-	<!-- /ko -->
-	</div>
+    <div class="faonni-socialprovider">
+    <!-- ko foreach: getCollection() -->
+        <!-- ko if: $parent.isPopup() -->
+        <a data-bind="text: title, attr: {href: url, 'data-width': width, 'data-height': height, class: 'provider provider-' + id}, mageInit: {'faonni/sociallogin': {}}"></a>
+        <!-- /ko -->
+        <!-- ko ifnot: $parent.isPopup() -->
+        <a data-bind="text: title, attr: {href: url, 'data-width': width, 'data-height': height, class: 'provider provider-' + id}"></a>
+        <!-- /ko -->
+    <!-- /ko -->
+    </div>
 <!-- /ko -->

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Controller\Account;
@@ -26,18 +26,18 @@ class DeleteProfile extends AbstractAccount
      *
      * @var \Faonni\SocialLogin\Model\Profile
      */
-    protected $_profile; 
-    
-   /**
+    protected $_profile;
+
+    /**
      * Initialize controller
      *
      * @param Context $context
      * @param SocialLoginHelper $helper
      * @param ProviderFactory $providerFactory
-     * @param ProfileFactory $profile      
-     * @param DataObjectFactory $dataObjectFactory 
+     * @param ProfileFactory $profile
+     * @param DataObjectFactory $dataObjectFactory
      * @param Session $customerSession
-     * @param Random $mathRandom     
+     * @param Random $mathRandom
      * @param LoggerInterface $logger
      */
     public function __construct(
@@ -51,7 +51,7 @@ class DeleteProfile extends AbstractAccount
         LoggerInterface $logger
     ) {
         $this->_profile = $profileFactory->create();
-        
+
         parent::__construct(
             $context,
             $helper,
@@ -62,7 +62,7 @@ class DeleteProfile extends AbstractAccount
             $logger
         );
     }
-    
+
     /**
      * Delete Action
      *
@@ -71,27 +71,27 @@ class DeleteProfile extends AbstractAccount
      */
     public function execute()
     {
-		$id = $this->getRequest()->getParam('id', false);
-		if ($id) {
+        $id = $this->getRequest()->getParam('id', false);
+        if ($id) {
             try {
                 $profile = $this->_profile->load($id);
-				if ($profile->getCustomerId() === $this->_session->getCustomerId()) {
-					$profile->delete();
-					$this->messageManager->addSuccess(
-						__('You deleted the profile.')
-					);
-				} else {
-					$this->messageManager->addError(
-						__('We can\'t delete the profile right now.')
-					);
-				}                
+                if ($profile->getCustomerId() === $this->_session->getCustomerId()) {
+                    $profile->delete();
+                    $this->messageManager->addSuccess(
+                        __('You deleted the profile.')
+                    );
+                } else {
+                    $this->messageManager->addError(
+                        __('We can\'t delete the profile right now.')
+                    );
+                }
             } catch (\Exception $exception) {
                 $this->messageManager->addError(
-					$exception->getMessage()
-				);
-            }		
-		} 
-		return $this->resultRedirectFactory->create()
-			->setPath('*/*/socialProfile');
+                    $exception->getMessage()
+                );
+            }
+        }
+        return $this->resultRedirectFactory->create()
+            ->setPath('*/*/socialProfile');
     }
 }

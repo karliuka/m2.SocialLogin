@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Model\ResourceModel\Provider;
@@ -10,6 +10,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Framework\Data\Collection as AbstractCollection;
 use Magento\Store\Model\ScopeInterface;
+use Faonni\SocialLogin\Model\Provider;
 
 /**
  * Provider ResourceModel Collection
@@ -21,33 +22,32 @@ class Collection extends AbstractCollection
      *
      * @var string
      */
-    protected $_itemObjectClass = 'Faonni\SocialLogin\Model\Provider';
-    
+    protected $_itemObjectClass = Provider::class;
+
     /**
      * Core store config
      *
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     protected $_scopeConfig;
-    
+
     /**
      * Initialize collection
      *
      * @param EntityFactoryInterface $entityFactory
-     * @param ScopeConfigInterface $scopeConfig     
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         EntityFactoryInterface $entityFactory,
         ScopeConfigInterface $scopeConfig
-        
     ) {
         $this->_scopeConfig = $scopeConfig;
-        
-		parent::__construct(
+
+        parent::__construct(
             $entityFactory
-        );        
+        );
     }
-    
+
     /**
      * Load data
      *
@@ -70,28 +70,28 @@ class Collection extends AbstractCollection
                 /* add item to collection */
                 $this->addItem($item);
             }
-            usort($this->_items, array($this, 'sortOrderCollection'));
+            usort($this->_items, [$this, 'sortOrderCollection']);
         }
         return $this->_setIsLoaded();
     }
-    
-	/**
-	 * Sort order collection
-	 *
-	 * @param string $a
-	 * @param string $b 
-	 * @return int
-	 */		
-	public function sortOrderCollection($a, $b)
+
+    /**
+     * Sort order collection
+     *
+     * @param string $a
+     * @param string $b
+     * @return int
+     */
+    public function sortOrderCollection($a, $b)
     {
-		if (!isset($a['sort_order'], $b['sort_order']) || 
+        if (!isset($a['sort_order'], $b['sort_order']) ||
             $a['sort_order'] == $b['sort_order']
         ) {
             return 0;
-        } 
-		return ($a['sort_order'] < $b['sort_order']) ? -1 : 1;
-    } 
-    
+        }
+        return ($a['sort_order'] < $b['sort_order']) ? -1: 1;
+    }
+
     /**
      * Convert items array to array for select options
      *
@@ -111,5 +111,5 @@ class Collection extends AbstractCollection
     protected function _toOptionArray($valueField = 'id', $labelField = 'name', $additional = [])
     {
         return parent::_toOptionArray($valueField, 'title', $additional);
-    }    
+    }
 }

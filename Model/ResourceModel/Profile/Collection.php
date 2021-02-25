@@ -1,12 +1,14 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Model\ResourceModel\Profile;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Faonni\SocialLogin\Model\ResourceModel\Profile as ProfileResource;
+use Faonni\SocialLogin\Model\Profile;
 
 /**
  * Profile ResourceModel Collection
@@ -20,12 +22,9 @@ class Collection extends AbstractCollection
      */
     protected function _construct()
     {
-        $this->_init(
-			'Faonni\SocialLogin\Model\Profile', 
-			'Faonni\SocialLogin\Model\ResourceModel\Profile'
-		);
+        $this->_init(Profile::class, ProfileResource::class);
     }
-    
+
     /**
      * Add Collection Filters by Customer Id
      *
@@ -35,10 +34,10 @@ class Collection extends AbstractCollection
      */
     public function addCustomerIdFilter($customerId, $exclude = false)
     {
-        $condition = $exclude 
-            ? ['neq' => $customerId] 
+        $condition = $exclude
+            ? ['neq' => $customerId]
             : $customerId;
-            
+
         return $this->addFieldToFilter('customer_id', $condition);
-    }    
+    }
 }

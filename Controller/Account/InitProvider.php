@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Controller\Account;
@@ -33,26 +33,26 @@ class InitProvider extends AbstractAccount
      * @var \Magento\Framework\Url\DecoderInterface
      */
     protected $_urlDecoder;
-    
+
     /**
      * Host Checker
      *
      * @var \Magento\Framework\Url\HostChecker
      */
-    protected $_hostChecker;    
-    
+    protected $_hostChecker;
+
     /**
      * Initialize controller
      *
      * @param Context $context
      * @param SocialLoginHelper $helper
      * @param ProviderFactory $providerFactory
-     * @param DataObjectFactory $dataObjectFactory 
+     * @param DataObjectFactory $dataObjectFactory
      * @param Session $customerSession
-     * @param Random $mathRandom     
+     * @param Random $mathRandom
      * @param LoggerInterface $logger
      * @param DecoderInterface $urlDecoder
-     * @param HostChecker|null $hostChecker     
+     * @param HostChecker|null $hostChecker
      */
     public function __construct(
         Context $context,
@@ -67,7 +67,7 @@ class InitProvider extends AbstractAccount
     ) {
         $this->_urlDecoder = $urlDecoder;
         $this->_hostChecker = $hostChecker ?: ObjectManager::getInstance()->get(HostChecker::class);
-        
+
         parent::__construct(
             $context,
             $helper,
@@ -78,7 +78,7 @@ class InitProvider extends AbstractAccount
             $logger
         );
     }
-    
+
     /**
      * Init Provider
      *
@@ -89,29 +89,28 @@ class InitProvider extends AbstractAccount
         $id = $this->getRequest()->getParam('id');
         if ($this->_helper->isEnabled() && $id) {
             try {
-				$provider = $this->_provider->load($id);
-				$display = $this->getRequest()->getParam('display');
-				$referer = $this->getRequest()->getParam(CustomerUrl::REFERER_QUERY_PARAM_NAME);
-				if ($referer) {
-					$referer = $this->_urlDecoder->decode($referer);
-					if ($this->_hostChecker->isOwnOrigin($referer)) {
-						$this->_session->setAfterAuthUrl($referer);
-					}
-				}				
+                $provider = $this->_provider->load($id);
+                $display = $this->getRequest()->getParam('display');
+                $referer = $this->getRequest()->getParam(CustomerUrl::REFERER_QUERY_PARAM_NAME);
+                if ($referer) {
+                    $referer = $this->_urlDecoder->decode($referer);
+                    if ($this->_hostChecker->isOwnOrigin($referer)) {
+                        $this->_session->setAfterAuthUrl($referer);
+                    }
+                }
                 $salt = $this->_mathRandom->getRandomString(32);
                 $this->_session->setSocialLoginSalt($salt);
                 $this->_session->setSocialLoginDisplay($display);
-                
+
                 /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
-                $resultRedirect = $this->resultRedirectFactory->create();                                
+                $resultRedirect = $this->resultRedirectFactory->create();
                 $resultRedirect->setUrl(
                     $provider->getProviderUrl(Provider::SCOPE_PREFIX, $salt)
                 );
-                return $resultRedirect;                  
-            } 
-            catch (Exception $e) {
+                return $resultRedirect;
+            } catch (Exception $e) {
                 $this->_logger->addError(__('Error Loading the %1 Provider', $id));
-            }             
+            }
         }
         throw new NotFoundException(__('Page not found.'));
     }

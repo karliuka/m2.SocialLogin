@@ -2,23 +2,23 @@
     "name": "faonni/module-social-login",
     "description": "Extension allows your user to login or register by using their existing account from social networks.",
     "type": "magento2-module",
-	"version": "2.1.3",
+    "version": "2.1.3",
     "authors": [{
-        "name" : "Karliuka Vitalii",
+        "name": "Karliuka Vitalii",
         "email": "karliuka.vitalii@gmail.com"
-    }],	
-	"license": [
-		"OSL-3.0"
-	],
-	"require": {
-		"magento/module-customer": "100.1.*|101.0.*"
-	},
-	"autoload": {
-		"files": [ 
-			"registration.php" 
-		],
-		"psr-4": {
-			"Faonni\\SocialLogin\\": ""
-		}
-	}
+    }],
+    "license": [
+        "OSL-3.0"
+    ],
+    "require": {
+        "magento/module-customer": "100.1.*|101.0.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php" 
+        ],
+        "psr-4": {
+            "Faonni\\SocialLogin\\": ""
+        }
+    }
 }

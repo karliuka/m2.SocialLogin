@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Helper;
@@ -21,7 +21,7 @@ class Data extends AbstractHelper
      * Enabled Config Path
      */
     const XML_CONFIG_ENABLED = 'faonni_sociallogin/storefront/active';
-    	
+
     /**
      * Customer Default Group Config Path
      */
@@ -31,17 +31,17 @@ class Data extends AbstractHelper
      * Popup Config Path
      */
     const XML_CONFIG_POPUP = 'faonni_sociallogin/storefront/popup';
-    
+
     /**
      * Store Manager
      *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected $_storeManager; 
-    
+    protected $_storeManager;
+
     /**
-	 * Initialize Helper
-	 *	
+     * Initialize Helper
+     *
      * @param Context $context
      * @param StoreManagerInterface $storeManager
      */
@@ -50,57 +50,57 @@ class Data extends AbstractHelper
         StoreManagerInterface $storeManager
     ) {
         $this->_storeManager = $storeManager;
-        
+
         parent::__construct(
             $context
         );
-    } 
-    
+    }
+
     /**
      * Check Social Login Functionality Should be Enabled
      *
-     * @param string $store	 
+     * @param string $store
      * @return bool
      */
     public function isEnabled($store = null)
     {
         return $this->_getConfig(self::XML_CONFIG_ENABLED, $store);
-    } 
-    
+    }
+
     /**
      * Check Popup Mode
      *
-     * @param string $store	 
+     * @param string $store
      * @return bool
      */
     public function isPopupMode($store = null)
     {
         return $this->_getConfig(self::XML_CONFIG_POPUP, $store);
-    } 
-    
+    }
+
     /**
      * Retrieve Customer Default GroupId
      *
-     * @param string $store 
+     * @param string $store
      * @return string
      */
     public function getCustomerDefaultGroupId($store = null)
     {
         return $this->_getConfig(self::XML_CONFIG_DEFAULT_GROUP, $store);
-    } 
-    
+    }
+
     /**
      * Retrieve Redirect Provider URL
-     * 
+     *
      * @param string $probiderId
      * @return string
      */
     public function getRedirectUrl($probiderId)
     {
-		return $this->getStore(Store::DEFAULT_STORE_ID)
+        return $this->getStore(Store::DEFAULT_STORE_ID)
             ->getBaseUrl() . 'customer/account/oauth/id/' . $probiderId . '/';
     }
-    
+
     /**
      * Retrieve Application Store Object
      *
@@ -111,16 +111,16 @@ class Data extends AbstractHelper
     {
         return $this->_storeManager->getStore($storeId);
     }
-    
+
     /**
      * Retrieve Store Configuration Data
      *
      * @param string $path
-     * @param int|Store $store	 
+     * @param int|Store $store
      * @return string|null
      */
     protected function _getConfig($path, $store = null)
     {
         return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE, $store);
-    }   
+    }
 }

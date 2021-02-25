@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Block\Adminhtml\System\Config\Form;
@@ -21,13 +21,13 @@ class Redirect extends Field
      *
      * @var \Faonni\SocialLogin\Helper\Data
      */
-    protected $_helper; 
-    
+    protected $_helper;
+
     /**
-	 * Initialize field
-	 *	
+     * Initialize field
+     *
      * @param Context $context
-     * @param SocialLoginHelper $helper     
+     * @param SocialLoginHelper $helper
      * @param array $data
      */
     public function __construct(
@@ -36,9 +36,9 @@ class Redirect extends Field
         array $data = []
     ) {
         $this->_helper = $helper;
-        
+
         parent::__construct(
-            $context, 
+            $context,
             $data
         );
     }
@@ -51,14 +51,13 @@ class Redirect extends Field
      */
     public function render(AbstractElement $element)
     {
-		$element
+        $element
             ->setReadonly(true)
             ->setValue(
                 $this->_helper->getRedirectUrl(
                     preg_replace("#^faonni_socialprovider_(.+?)_redirect$#", '$1', $element->getId())
                 )
-            );        
+            );
         return parent::render($element);
     }
 }
- 

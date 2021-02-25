@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Setup;
@@ -27,15 +27,14 @@ class Uninstall implements UninstallInterface
         $installer = $setup;
         $installer->startSetup();
         $connection = $installer->getConnection();
-		
+
         /**
          * Remove table 'faonni_sociallogin_profile'
-         */		
+         */
         $tableName = 'faonni_sociallogin_profile';
-        if ($installer->tableExists($tableName)) {			
+        if ($installer->tableExists($tableName)) {
             $connection->dropTable($installer->getTable($tableName));
-		}	                                           
+        }
         $installer->endSetup();
     }
 }
- 

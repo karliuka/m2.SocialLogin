@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Controller\Account;
@@ -24,7 +24,7 @@ class PopupClose extends AbstractAccount
     {
         if (!$this->_helper->isEnabled()) {
             throw new NotFoundException(__('Page not found.'));
-        } 
+        }
         /** @var \Magento\Framework\View\Result\Page resultPage */
         return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }

@@ -6,12 +6,12 @@
  * See COPYING.txt for license details.
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-	<!--
-	event faonni_sociallogin_obtain_token_after
-	-->	    
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--
+    event faonni_sociallogin_obtain_token_after
+    -->
     <event name="faonni_sociallogin_obtain_token_after">
-        <observer name="faonni_sociallogin" instance="Faonni\SocialLogin\Observer\ObtainTokenObserver" />
-    </event>            
+        <observer name="faonni_sociallogin" instance="Faonni\SocialLogin\Observer\ObtainTokenObserver"/>
+    </event>
 </config>

@@ -6,12 +6,12 @@
  * See COPYING.txt for license details.
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="empty">
-    <body>   
+    <body>
         <referenceContainer name="content">
             <!-- customer.account.sociallogin.popupclose -->
             <block class="Faonni\SocialLogin\Block\Account\Popup" name="customer.account.sociallogin.popupclose" template="account/popup.phtml" cacheable="false"/>
         </referenceContainer>
     </body>
-</page> 
+</page>

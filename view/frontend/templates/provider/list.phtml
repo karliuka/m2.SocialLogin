@@ -1,26 +1,26 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 ?>
 <?php $collection = $block->getCollection() ?>
 <?php if ($collection->getSize()) : ?>
     <div class="faonni-socialprovider">
-        <div class="block-title"><?php echo $block->escapeHtml(__('Connect with Social')) ?></div>        
+        <div class="block-title"><?= $block->escapeHtml(__('Connect with Social')) ?></div>
         <?php foreach ($collection as $provider) : ?>
-            <a href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" 
-			   class="provider provider-<?php echo $block->escapeHtml($provider->getId()) ?>" 
-			   data-width="<?php echo $block->escapeHtml($provider->getWidth()) ?>" 
-			   data-height="<?php echo $block->escapeHtml($provider->getHeight()) ?>">
-                <?php echo $block->escapeHtml($provider->getTitle()) ?>
+            <a href="<?= $block->escapeHtml($provider->getUrl()) ?>"
+                class="provider provider-<?= $block->escapeHtml($provider->getId()) ?>" 
+                data-width="<?= $block->escapeHtml($provider->getWidth()) ?>" 
+                data-height="<?= $block->escapeHtml($provider->getHeight()) ?>">
+                <?= $block->escapeHtml($provider->getTitle()) ?>
             </a>
         <?php endforeach ?>
     </div>
-    <?php if ($block->isPopupMode()): ?>
-		<script type="text/x-magento-init">
-			{".provider": {"faonni/sociallogin": {}}}
-		</script>
-	<?php endif ?>  
+    <?php if ($block->isPopupMode()) : ?>
+        <script type="text/x-magento-init">
+            {".provider": {"faonni/sociallogin": {}}}
+        </script>
+    <?php endif ?>
 <?php endif ?>

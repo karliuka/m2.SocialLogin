@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Model\Checkout;
@@ -24,35 +24,35 @@ class ConfigProvider implements ConfigProviderInterface
      * @var \Faonni\SocialLogin\Helper\Data
      */
     protected $_helper;
-    
+
     /**
      * Provider model
      *
      * @var \Faonni\SocialLogin\Model\Provider
      */
     protected $_provider;
-    
+
     /**
      * Url Encoder
      *
      * @var \Magento\Framework\Url\EncoderInterface
      */
-    protected $_urlEncoder; 
-    
+    protected $_urlEncoder;
+
     /**
      * URL builder
      *
      * @var \Magento\Framework\UrlInterface
      */
-    protected $_urlBuilder;    
-    
+    protected $_urlBuilder;
+
     /**
-	 * Initialize Config
-	 *	
+     * Initialize Config
+     *
      * @param SocialLoginHelper $helper
-     * @param ProviderFactory $providerFactory 
+     * @param ProviderFactory $providerFactory
      * @param EncoderInterface $urlEncoder
-     * @param UrlInterface $urlBuilder     
+     * @param UrlInterface $urlBuilder
      */
     public function __construct(
         SocialLoginHelper $helper,
@@ -63,8 +63,8 @@ class ConfigProvider implements ConfigProviderInterface
         $this->_helper = $helper;
         $this->_provider = $providerFactory->create();
         $this->_urlEncoder = $urlEncoder;
-        $this->_urlBuilder = $urlBuilder;        
-    } 
+        $this->_urlBuilder = $urlBuilder;
+    }
 
     /**
      * Retrieve Assoc Array Of Checkout Configuration
@@ -74,11 +74,11 @@ class ConfigProvider implements ConfigProviderInterface
     public function getConfig()
     {
         return ['sociallogin' => [
-			'popup' => $this->_helper->isPopupMode(),
-			'providers' => $this->getCollection()
-		]];
+            'popup' => $this->_helper->isPopupMode(),
+            'providers' => $this->getCollection()
+        ]];
     }
-    
+
     /**
      * Generate Url By Route And Parameters
      *
@@ -90,34 +90,34 @@ class ConfigProvider implements ConfigProviderInterface
     {
         return $this->_urlBuilder->getUrl($route, $params);
     }
-    
+
     /**
      * Retrieve Provider Collection
-     * 	    
+     *
      * @return \Faonni\SocialLogin\Model\ResourceModel\Provider\Collection
      */
     public function getCollection()
-    {   
-		$providers = [];
-		$params = [
-			Url::REFERER_QUERY_PARAM_NAME => 
-			$this->_urlEncoder->encode(
-				$this->getUrl('*/*/*', ['_current' => true, '_fragment' => 'shipping'])
-			)
-		];
-		$collection = $this->_provider->getCollection();				
-		foreach ($collection as $key => $provider) {
-			if (!$provider->isAvailable()) {
-				continue;
-			}		
+    {
+        $providers = [];
+        $params = [
+            Url::REFERER_QUERY_PARAM_NAME =>
+            $this->_urlEncoder->encode(
+                $this->getUrl('*/*/*', ['_current' => true, '_fragment' => 'shipping'])
+            )
+        ];
+        $collection = $this->_provider->getCollection();
+        foreach ($collection as $key => $provider) {
+            if (!$provider->isAvailable()) {
+                continue;
+            }
             $providers[] = [
                 'id' => $provider->getId(),
-                'width'  => $provider->getWidth(),
+                'width' => $provider->getWidth(),
                 'height' => $provider->getHeight(),
-                'url'    => $provider->getUrl($params),
-                'title'  => $provider->getTitle()
-            ];			
-		}
-		return $providers;
-    }     
+                'url' => $provider->getUrl($params),
+                'title' => $provider->getTitle()
+            ];
+        }
+        return $providers;
+    }
 }

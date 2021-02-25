@@ -1,57 +1,57 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 ?>
 <?php $providerCollection = $block->getProviderCollection() ?>
 <?php $profileCollection = $block->getProfileCollection() ?>
-<?php if (0 < count($providerCollection)): ?>
+<?php if (0 < count($providerCollection)) : ?>
     <div class="block table-wrapper">
-        <?php foreach ($providerCollection as $provider): ?>
-            <?php if (!$provider->isAvailable()): ?>
+        <?php foreach ($providerCollection as $provider) : ?>
+            <?php if (!$provider->isAvailable()) : ?>
                 <?php continue ?>
             <?php endif ?>
             <div class="provider-section">
-				<div class="block-title provider-title">
-					<strong><?php /* @escapeNotVerified */ echo $provider->getTitle() ?></strong>
-					<a 	href="<?php echo $block->escapeHtml($provider->getUrl()) ?>" 
-						class="provider provider-<?php /* @escapeNotVerified */ echo $provider->getId() ?>"  
-						title="<?php echo /* @noEscape */ __('Add New Profile') ?>"
-						data-width="<?php /* @escapeNotVerified */ echo $provider->getWidth() ?>" 
-						data-height="<?php /* @escapeNotVerified */ echo $provider->getHeight() ?>">					   
-					<?php echo /* @noEscape */ __('Add New') ?>
-				</a>
-				</div>            
-				<?php $collection = $profileCollection->getItemsByColumnValue('provider_id', $provider->getId()) ?>
-				<?php if (0 < count($collection)): ?>
-					<table class="data table" id="my-profiles-table">
-						<tbody>
-							<?php foreach ($collection as $profile): ?>
-								<tr>
-									<td class="col-firstname"><?php echo /* @noEscape */ $profile->getFirstname() ?></td>
-									<td class="col-lastname"><?php echo /* @noEscape */ $profile->getLastname() ?></td>
-									<td class="col-email"><?php echo /* @noEscape */ $profile->getEmail() ?></td>
-									<td class="col-created"><?php echo /* @noEscape */ $profile->getCreatedAt() ?></td>
-									<td class="col-actions">
-										<a class="action delete" href="<?php echo $this->getDeleteUrl($profile) ?>" title="<?php echo /* @noEscape */ __('Remove This Profile') ?>"></a>
-									</td>
-								</tr>                        
-							<?php endforeach ?>
-						</tbody>
-					</table>
-				<?php else : ?>
-					<div class="message info empty"><span><?php echo $block->escapeHtml(__('You do not have a connected %1 profile.', $provider->getTitle())) ?></span></div>            
-				<?php endif ?> 
-			</div>	
+                <div class="block-title provider-title">
+                    <strong><?= $block->escapeHtml($provider->getTitle()) ?></strong>
+                    <a href="<?= $block->escapeHtml($provider->getUrl()) ?>"
+                        class="provider provider-<?= $block->escapeHtml($provider->getId()) ?>"
+                        title="<?= $block->escapeHtml(__('Add New Profile')) ?>"
+                        data-width="<?= $block->escapeHtml($provider->getWidth()) ?>" 
+                        data-height="<?= $block->escapeHtml($provider->getHeight()) ?>">
+                    <?= $block->escapeHtml(__('Add New')) ?>
+                </a>
+                </div>
+                <?php $collection = $profileCollection->getItemsByColumnValue('provider_id', $provider->getId()) ?>
+                <?php if (0 < count($collection)) : ?>
+                    <table class="data table" id="my-profiles-table">
+                        <tbody>
+                            <?php foreach ($collection as $profile) : ?>
+                                <tr>
+                                    <td class="col-firstname"><?= $block->escapeHtml($profile->getFirstname()) ?></td>
+                                    <td class="col-lastname"><?= $block->escapeHtml($profile->getLastname()) ?></td>
+                                    <td class="col-email"><?= $block->escapeHtml($profile->getEmail()) ?></td>
+                                    <td class="col-created"><?= $block->escapeHtml($profile->getCreatedAt()) ?></td>
+                                    <td class="col-actions">
+                                        <a class="action delete" href="<?= $block->escapeHtml($block->getDeleteUrl($profile)) ?>" title="<?= $block->escapeHtml(__('Remove This Profile')) ?>"></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <div class="message info empty"><span><?= $block->escapeHtml(__('You do not have a connected %1 profile.', $provider->getTitle())) ?></span></div>
+                <?php endif ?>
+            </div>
         <?php endforeach ?>
     </div>
-    <?php if ($block->isPopupMode()): ?>
-		<script type="text/x-magento-init">
-			{".provider": {"faonni/sociallogin": {}}}
-		</script>
-	<?php endif ?>
+    <?php if ($block->isPopupMode()) : ?>
+        <script type="text/x-magento-init">
+            {".provider": {"faonni/sociallogin": {}}}
+        </script>
+    <?php endif ?>
 <?php else : ?>
-    <div class="message info empty"><span><?php echo /* @noEscape */ __('You do not have available providers.') ?></span></div>
+    <div class="message info empty"><span><?= $block->escapeHtml(__('You do not have available providers.')) ?></span></div>
 <?php endif ?>

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SocialLogin\Controller\Account;
@@ -26,51 +26,51 @@ abstract class AbstractAccount extends CustomerAbstractAccount
      * @var \Magento\Framework\DataObjectFactory
      */
     protected $_dataObjectFactory;
-    
+
     /**
      * Customer Session
-	 *
+     *
      * @var \Magento\Customer\Model\Session
      */
-    protected $_session;  
-    
+    protected $_session;
+
     /**
      * Math Random
-	 *
+     *
      * @var \Magento\Framework\Math\Random
      */
-    protected $_mathRandom;    
-    
+    protected $_mathRandom;
+
     /**
      * Logger
      *
      * @var \Psr\Log\LoggerInterface
      */
-    protected $_logger;    
-    
+    protected $_logger;
+
     /**
      * SocialLogin helper
      *
      * @var \Faonni\SocialLogin\Helper\Data
      */
     protected $_helper;
-    
+
     /**
      * Provider model
      *
      * @var \Faonni\SocialLogin\Model\Provider
      */
-    protected $_provider;    
-    
+    protected $_provider;
+
     /**
      * Initialize controller
      *
      * @param Context $context
      * @param SocialLoginHelper $helper
      * @param ProviderFactory $providerFactory
-     * @param DataObjectFactory $dataObjectFactory 
+     * @param DataObjectFactory $dataObjectFactory
      * @param Session $customerSession
-     * @param Random $mathRandom     
+     * @param Random $mathRandom
      * @param LoggerInterface $logger
      */
     public function __construct(
@@ -88,10 +88,9 @@ abstract class AbstractAccount extends CustomerAbstractAccount
         $this->_session = $customerSession;
         $this->_mathRandom = $mathRandom;
         $this->_logger = $logger;
-        
+
         parent::__construct(
             $context
         );
     }
 }
- 

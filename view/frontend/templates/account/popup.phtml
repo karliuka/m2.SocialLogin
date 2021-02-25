@@ -1,16 +1,16 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 ?>
 <script type="text/javascript">
 //<![CDATA[
 if (window.opener){ 
-	window.close();
-	//window.opener.location.href = "<?php echo $block->getRedirectUrl() ?>";
-	window.opener.location.reload(true);
+    window.close();
+    //window.opener.location.href = "<?= /* @noEscape */ $block->getRedirectUrl() ?>";
+    window.opener.location.reload(true);
 }
 //]]>
 </script>

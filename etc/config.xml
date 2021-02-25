@@ -6,44 +6,44 @@
  * See COPYING.txt for license details.
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <faonni_socialprovider>
             <google>
                 <active>0</active>
-				<title>Google Plus</title>
-				<api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <title>Google Plus</title>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
                 <secret backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
                 <width>800</width>
-                <height>450</height>				
+                <height>450</height>
                 <sort_order>10</sort_order>
             </google>
             <facebook>
                 <active>0</active>
-				<title>Facebook</title>
-				<api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <title>Facebook</title>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
                 <secret backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
                 <width>950</width>
-                <height>450</height>				
+                <height>450</height>
                 <sort_order>20</sort_order>
             </facebook>
             <linkedin>
                 <active>0</active>
-				<title>LinkedIn</title>
-				<api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <title>LinkedIn</title>
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
                 <secret backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
                 <width>400</width>
-                <height>550</height>				
+                <height>550</height>
                 <sort_order>30</sort_order>
             </linkedin>
         </faonni_socialprovider>
         <faonni_sociallogin>
             <storefront>
                 <active>1</active>
-				<default_group>1</default_group>
-				<popup>1</popup>
+                <default_group>1</default_group>
+                <popup>1</popup>
             </storefront>
-        </faonni_sociallogin>        
+        </faonni_sociallogin>
     </default>
 </config>

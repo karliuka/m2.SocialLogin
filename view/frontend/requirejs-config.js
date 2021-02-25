@@ -6,7 +6,7 @@
 var config = {
     map: {
         '*': {
-			'faonni/sociallogin' : 'Faonni_SocialLogin/js/popup',
+            'faonni/sociallogin' : 'Faonni_SocialLogin/js/popup',
         }
     }
 };
