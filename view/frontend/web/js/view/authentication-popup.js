@@ -1,6 +1,5 @@
 /**
- * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ * Copyright © Karliuka Vitalii(karliuka.vitalii@gmail.com)
  * See COPYING.txt for license details.
  */
 define([
@@ -13,7 +12,7 @@ function (providerList) {
         /**
          * Default Config Option
          * @var {Object}
-         */			
+         */
         defaults: {
             template: 'Faonni_SocialLogin/authentication/provider/list'
         }
